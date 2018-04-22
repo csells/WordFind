@@ -62,7 +62,18 @@ private:
 
     long        m_nMaxLen;
     bool        m_bFinding;
-    set<string> m_setWords;
+
+	struct InsensitiveCompare {
+		bool operator() (const std::string& a, const std::string& b) const {
+			return stricmp(a.c_str(), b.c_str()) < 0;
+		}
+	};
+
+	//set<string, InsensitiveCompare> m_setWords;
+	set<string> m_setWords;
+public:
+	afx_msg void OnBnClickedUpper();
+	afx_msg void OnBnClickedLower();
 };
 
 //{{AFX_INSERT_LOCATION}}

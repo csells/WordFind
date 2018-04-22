@@ -53,6 +53,8 @@ BEGIN_MESSAGE_MAP(CWordFindDlg, CDialog)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_COPY, OnCopy)
 	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDC_UPPER, &CWordFindDlg::OnBnClickedUpper)
+	ON_BN_CLICKED(IDC_LOWER, &CWordFindDlg::OnBnClickedLower)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -140,9 +142,6 @@ void CWordFindDlg::OnFind()
 		{
 			m_lbWords.ResetContent();
 			set<string> setFoundWords;
-
-			// TODO: Figure out how to do case-insensitive comparison
-			m_sWord.MakeLower();
 
 			// Only check letters
 			string sWord;
@@ -285,4 +284,23 @@ void CWordFindDlg::OnCopy()
 			MessageBox("Unable to copy the words to the Clipboard");
 		}
 	}
+}
+
+
+
+void CWordFindDlg::OnBnClickedUpper()
+{
+	CString s;
+	m_ebWord.GetWindowText(s);
+	s.MakeUpper();
+	m_ebWord.SetWindowText(s);
+}
+
+
+void CWordFindDlg::OnBnClickedLower()
+{
+	CString s;
+	m_ebWord.GetWindowText(s);
+	s.MakeLower();
+	m_ebWord.SetWindowText(s);
 }
